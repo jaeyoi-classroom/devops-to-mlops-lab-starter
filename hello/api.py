@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from hello.db import get_db
+from .db import get_db
 
 bp = Blueprint("api", __name__)
 

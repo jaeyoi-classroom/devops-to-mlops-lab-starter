@@ -10,7 +10,7 @@ def get_db():
             password=current_app.config["DATABASE_PASSWORD"],
             host=current_app.config["DATABASE_HOST"],
         )
-        g.db.autocommit = True  # PostgreSQL에서는 이 설정이 필요할 수 있습니다.
+        g.db.autocommit = True
 
     return g.db
 
@@ -40,4 +40,7 @@ def init_db():
 
 def init_app(app):
     app.teardown_appcontext(close_db)
-    init_db()
+    try:
+        init_db()
+    except:
+        pass
