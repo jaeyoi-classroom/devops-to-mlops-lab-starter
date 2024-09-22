@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-from .db import get_db
+from .db import get_db_connection
 
 bp = Blueprint("api", __name__)
 
@@ -12,15 +12,15 @@ def hello():
 
 @bp.route("/visit")
 def visit():
-    db = get_db()
-    with db.cursor() as cursor:
-        cursor.execute("""
-            UPDATE visit_count 
-            SET count = count + 1 
-            WHERE id = 1
-            RETURNING count;
-        """)
-        count = cursor.fetchone()[0]
-        db.commit()
+    with get_db_connection() as db:
+        with db.cursor() as cursor:
+            cursor.execute("""
+                UPDATE visit_count 
+                SET count = count + 1 
+                WHERE id = 1
+                RETURNING count;
+            """)
+            count = cursor.fetchone()[0]
+            db.commit()
 
     return f"{count}번째 방문입니다."

@@ -1,6 +1,6 @@
 from flask import Flask
 
-from . import api, db
+from . import api
 
 
 def create_app():
@@ -11,9 +11,6 @@ def create_app():
         DATABASE_USER="postgres",
         DATABASE_PASSWORD="mysecretpassword",
     )
-
-    with app.app_context():
-        db.init_app(app)
 
     app.register_blueprint(api.bp)
 
