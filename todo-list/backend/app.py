@@ -62,7 +62,7 @@ def manage_todos():
 
 
 @app.route("/api/todos/<int:todo_id>", methods=["PUT"])
-def update_or_delete_todo(todo_id):
+def update_todo(todo_id):
     todo = Todo.query.get(todo_id)
 
     if not todo:
