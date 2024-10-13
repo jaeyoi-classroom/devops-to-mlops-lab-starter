@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from prometheus_client import Counter, generate_latest
 
 from .db import get_db_connection
@@ -37,3 +37,8 @@ REQUEST_COUNT = Counter("app_requests_total", "Total number of requests", ["endp
 @bp.route("/metrics")
 def metrics():
     return generate_latest()
+
+
+@bp.route("/healthcheck", methods=["GET"])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
