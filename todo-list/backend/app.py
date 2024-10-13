@@ -86,8 +86,9 @@ def delete_todo(todo_id):
     if not todo:
         return jsonify({"message": "Task not found"}), 404
 
-    # TODO 삭제 기능 구현
-    return jsonify({"message": "Not Implemented"}), 501
+    db.session.delete(todo)
+    db.session.commit()
+    return jsonify({"message": "Task deleted"})
 
 
 if __name__ == "__main__":
