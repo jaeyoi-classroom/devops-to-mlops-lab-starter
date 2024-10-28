@@ -1,0 +1,7 @@
+name: kospi-prediction
+
+services:
+  app:
+    build: .
+    ports:
+      - 7860:7860
