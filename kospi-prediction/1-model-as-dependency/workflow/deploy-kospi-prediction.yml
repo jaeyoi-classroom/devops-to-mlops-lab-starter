@@ -3,8 +3,9 @@ name: KOSPI 지수 예측 데모 배포 (Model-as-Dependency)
 on:
   push:
     branches:
-      - kospi-prediction
+      - main
     paths:
+      - ".github/workflows/deploy-kospi-prediction.yml"
       - "kospi-prediction/1-model-as-dependency/**"
 
 jobs:
