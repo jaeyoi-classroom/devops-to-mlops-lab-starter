@@ -1,0 +1,29 @@
+prometheus:
+  prometheusSpec:
+    podMonitorSelector:
+      matchLabels: null
+    probeSelector:
+      matchLabels: null
+    ruleSelector:
+      matchLabels: null
+    scrapeConfigSelector:
+      matchLabels: null
+    serviceMonitorSelector:
+      matchLabels: null
+
+  # Prometheus에서 메트릭을 모니터링 할 수 있게 연결
+  additionalServiceMonitors:
+    - name: monitoring
+      selector:
+        matchLabels:
+          networking.internal.knative.dev/serviceType: Private
+      namespaceSelector:
+        any: true
+      endpoints:
+        - path: /metrics
+          interval: 15s
+
+thanosRuler:
+  thanosRulerSpec:
+    ruleSelector:
+      matchLabels: null

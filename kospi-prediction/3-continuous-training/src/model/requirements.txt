@@ -1,0 +1,4 @@
+kserve==0.14.0
+scikit-learn==1.5.2
+yfinance==0.2.45
+evidently==0.4.39

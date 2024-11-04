@@ -1,0 +1,27 @@
+name: kospi-prediction
+
+services:
+  app:
+    build: app
+    ports:
+      - 80:7860
+    environment:
+      - MODEL_API_URL=http://model:8080/v2/models/kospi-prediction-model/infer
+
+  model:
+    build: model
+
+  dashboard:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_storage:/var/lib/grafana
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+volumes:
+  grafana_storage: {}
