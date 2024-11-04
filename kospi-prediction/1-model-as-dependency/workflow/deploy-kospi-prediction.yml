@@ -1,0 +1,22 @@
+name: KOSPI 지수 예측 데모 배포 (Model-as-Dependency)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-kospi-prediction.yml"
+      - "kospi-prediction/1-model-as-dependency/**"
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted # Self hosted Runner에서 실행
+
+    steps:
+      - name: 저장소 받아오기
+        uses: actions/checkout@v4
+
+      - name: docker compose
+        run: |
+          docker compose -f "kospi-prediction/1-model-as-dependency/src/compose.yml" down
+          docker compose -f "kospi-prediction/1-model-as-dependency/src/compose.yml" up --build -d
